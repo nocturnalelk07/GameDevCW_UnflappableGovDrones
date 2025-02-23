@@ -4,39 +4,34 @@ using UnityEngine;
 
 public class MenuActions : MonoBehaviour
 {
-    [SerializeField] GameObject settingsMenu;
-    //this can be null in the main menu scene
-    [SerializeField] GameObject pauseMenu = null;
-    [SerializeField] GameObject mainMenu;
-
     //functions for the in game menus to use
 
-    //shared functions (pause menu)
+    //shared functions
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    public void OpenSettings()
-    {
-        
-    }
-
     //main menu functions
-    public void SelectLevel()
-    {
 
-    }
 
     //settings menu fuctions
-
-    public void CloseSettings() 
-    {
-        
-    }
-
     public void ChangeVolume()
     {
 
     }
+
+    //leaderboard functions
+
+
+    //level select screen functions
+    public void ChangeSelectedLevel(float i)
+    {
+
+    }
+
+    public void SelectLevel()
+    {
+
+    }    
 }
