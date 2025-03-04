@@ -1,0 +1,114 @@
+{
+    "name": "turretControls",
+    "maps": [
+        {
+            "name": "turretActionMap",
+            "id": "f73710c1-b8b0-4f2f-b1ff-4ba214d05e5d",
+            "actions": [
+                {
+                    "name": "fire",
+                    "type": "Button",
+                    "id": "4fda2089-38d8-45e9-8589-22b2d36a80f9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "aimUp",
+                    "type": "Value",
+                    "id": "7b2899ae-ad6c-4813-88cb-8ae00f5f6713",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "aimDown",
+                    "type": "Value",
+                    "id": "e5fda1d3-641f-48c7-a6f3-0f0478cb9075",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "increasePower",
+                    "type": "Value",
+                    "id": "aee2f739-9846-4994-a922-d2b6cef1073b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DecreasePower",
+                    "type": "Value",
+                    "id": "ca753c5f-79de-4ef0-8845-99dfa838fd24",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "159fb21e-5877-446f-bfa9-dcbf01757e0f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fcfe5417-a084-4dd2-a6dc-43a7d2fd53f6",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "aimUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ec8ebb0-f9e0-45e7-8142-b031158df464",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "aimDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4b109f6-d2ce-4b62-8faa-dc8f61658a45",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "increasePower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1bb00e72-04aa-4893-827b-e880bceb5da0",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DecreasePower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
