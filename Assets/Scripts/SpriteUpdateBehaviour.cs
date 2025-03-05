@@ -9,18 +9,17 @@ public class SpriteUpdateBehaviour : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int count = 0;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void nextSprite()
     {
         spriteRenderer.sprite = sprites[count];
         count++;
-        if(count == sprites.Length)
+        if (count == sprites.Length)
         {
             count = 0;
         }
