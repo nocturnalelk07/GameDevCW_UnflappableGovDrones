@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "Hold,Hold",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Power",
-                    "type": "Value",
-                    "id": "33b80aa1-12eb-4af7-8718-3116405e222b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -48,7 +39,7 @@
                 {
                     "name": "WASD",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
-                    "path": "Dpad",
+                    "path": "Dpad(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -176,72 +167,6 @@
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "45c44e37-5521-4fe1-8be6-5996d3500773",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "8e9512dd-7e3f-4577-bd92-a104c0c2ad02",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "a74a0e97-54f8-4f18-af78-1c5cf4d3dfc3",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "3df18c60-29c5-42c3-9861-b4a994263bf0",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "450430da-3133-40c8-b949-5943ecac3cf7",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "44b8dd19-e207-4158-b5f5-a3894ebe8d00",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },

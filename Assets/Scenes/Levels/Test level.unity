@@ -284,7 +284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665a1b160e2e0f64686afdcd793d5ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationalSpeed: 100
   actions: {fileID: -944628639613478452, guid: 0ad57dac64ee5e64bbb9a82d5bc5fd2f, type: 3}
+  barrelPivotPoint: {fileID: 29989689}
 --- !u!1 &1004558954
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +298,7 @@ GameObject:
   - component: {fileID: 1004558956}
   - component: {fileID: 1004558955}
   - component: {fileID: 1004558957}
+  - component: {fileID: 1004558958}
   m_Layer: 0
   m_Name: drone
   m_TagString: Untagged
@@ -403,6 +406,19 @@ MonoBehaviour:
   - {fileID: 409344605, guid: 11d340f8ee1296948a5c833be60108cd, type: 3}
   - {fileID: 247209722, guid: 11d340f8ee1296948a5c833be60108cd, type: 3}
   - {fileID: 780728570, guid: 11d340f8ee1296948a5c833be60108cd, type: 3}
+--- !u!114 &1004558958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004558954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60483ef78ad79c42aca7460dbe73146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteUpdater: {fileID: 1004558957}
 --- !u!1 &1274466281
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +445,7 @@ Transform:
   m_GameObject: {fileID: 1274466281}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.578, y: 0.053, z: -0.04}
+  m_LocalPosition: {x: 0.58, y: 0.053, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
