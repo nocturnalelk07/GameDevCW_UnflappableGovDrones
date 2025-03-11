@@ -60,13 +60,11 @@ public class turretBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //we get the vector of the player's input each frame.
-
-        //The y value adjusts the aim of the turret (up or down angle) 
+        //The y input adjusts the aim of the turret (up or down angle) 
         aimValue.z = aimAction.ReadValue<Vector2>().y;
         barrelPivotPoint.transform.Rotate(aimValue * Time.deltaTime * rotationalSpeed);
 
-        //the x value controls power of the turret (left or right distance)
+        //the x input controls the power of the turret (left or right distance)
         powerInput = aimAction.ReadValue<Vector2>().x;
         if (powerInput != 0) 
         {
@@ -108,6 +106,12 @@ public class turretBehaviour : MonoBehaviour
         turretSpriteIndex = (int)((turretBarrelSpriteArray.Length - 1) * powerPercent);
         Debug.Log("power is: " + powerValue + " index is: " + turretSpriteIndex);
 
+        //finally we set the sprite with the calculated index
         turretSpriteUpdater.setSprite(turretSpriteIndex);
+    }
+
+    private void OnFire()
+    {
+
     }
 }

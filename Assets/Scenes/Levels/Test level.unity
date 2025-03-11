@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 724600030}
   - component: {fileID: 724600031}
+  - component: {fileID: 724600032}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -238,6 +239,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &724600032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724600029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3569f2593a84e2049820b5ece457e388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -827369361, guid: b9894a2b78b78de4988d9c593124ccf1, type: 3}
+  - {fileID: -1036768164, guid: b9894a2b78b78de4988d9c593124ccf1, type: 3}
+  - {fileID: 2101883456, guid: b9894a2b78b78de4988d9c593124ccf1, type: 3}
 --- !u!1 &785369605
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665a1b160e2e0f64686afdcd793d5ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationalSpeed: 100
+  turret: {fileID: 1274466281}
+  rotationalSpeed: 50
   actions: {fileID: -944628639613478452, guid: 0ad57dac64ee5e64bbb9a82d5bc5fd2f, type: 3}
   barrelPivotPoint: {fileID: 29989689}
 --- !u!1 &1004558954
@@ -429,6 +447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274466282}
   - component: {fileID: 1274466283}
+  - component: {fileID: 1274466284}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -506,6 +525,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1274466284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274466281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3569f2593a84e2049820b5ece457e388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -1277646072, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: -1903821752, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: -1079105574, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: -2018148756, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 1408678793, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: -1366406211, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 133334968, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 1975466751, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 1589059264, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 1496301984, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 1581500474, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 917944760, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 497946105, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: -379112216, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
+  - {fileID: 1873556499, guid: 4045cfaf909f8144a9fcb733257f8014, type: 3}
 --- !u!1 &1971496550
 GameObject:
   m_ObjectHideFlags: 0
