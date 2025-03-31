@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,17 +8,17 @@ public class turretBehaviour : MonoBehaviour
 {
     //this is the class for the turret that the player controls
 
-    private const int MAXIMUM_POWER = 100;
+    [SerializeField] private int MAXIMUM_POWER = 100;
+    [SerializeField] private int MINIMUM_POWER = 10;
     private const string ACTION_MAP_NAME = "Player";
     private const string MOVE_ACTION = "Move";
     private const string FIRE_ACTION = "Fire";
     private const string POWER_ACTION = "Power";
+    private const string DRONENAME = "drone";
 
     [SerializeField] private GameObject turret;
     private SpriteUpdateBehaviour turretSpriteUpdater;
     private Sprite[] turretBarrelSpriteArray;
-    
-
 
     [SerializeField] private int rotationalSpeed;
 
@@ -30,32 +31,29 @@ public class turretBehaviour : MonoBehaviour
     private Vector3 aimValue = new Vector3();
     private InputAction aimAction;
     private InputAction fireAction;
-    private InputAction powerAction;
 
+    [Header("drone Firing variables")]
+    [SerializeField] private droneBehaviour equippedDrone;
+    [SerializeField] private firingBehaviour firingBehaviour;
+    [SerializeField] private LineRenderer lineRenderer;
 
+    [Header("other")]
     private Rigidbody2D rb2d;
     [SerializeField] private GameObject barrelPivotPoint;
 
     private void Awake()
     {
+        powerValue = MINIMUM_POWER;
         aimAction = actions.FindActionMap(ACTION_MAP_NAME).FindAction(MOVE_ACTION);
         fireAction = actions.FindActionMap(ACTION_MAP_NAME).FindAction(FIRE_ACTION);
-        powerAction = actions.FindActionMap(ACTION_MAP_NAME).FindAction(POWER_ACTION);
-        
+        fireAction.performed += Fire;
+        rb2d = GetComponent<Rigidbody2D>();
+        turretSpriteUpdater = turret.GetComponent<SpriteUpdateBehaviour>();
     }
 
     private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        turretSpriteUpdater = turret.GetComponent<SpriteUpdateBehaviour>();
         turretBarrelSpriteArray = turretSpriteUpdater.getSprites();
-    }
-
-    private void Update()
-    {
-        
-
-        
     }
 
     private void FixedUpdate()
@@ -70,7 +68,8 @@ public class turretBehaviour : MonoBehaviour
         {
             OnAdjustPower();
         }
-        Debug.Log(aimValue);
+        drawProjection();
+        
     }
 
     private void OnEnable()
@@ -92,9 +91,9 @@ public class turretBehaviour : MonoBehaviour
         {
             powerValue = MAXIMUM_POWER;
         }
-        if (powerValue < 0)
+        if (powerValue < MINIMUM_POWER)
         {
-            powerValue = 0;
+            powerValue = MINIMUM_POWER;
         }
 
         //update the turret sprite to show the change in power on the gun
@@ -110,8 +109,19 @@ public class turretBehaviour : MonoBehaviour
         turretSpriteUpdater.setSprite(turretSpriteIndex);
     }
 
-    private void OnFire()
+    public void Fire(InputAction.CallbackContext context)
     {
+    }
 
+    private void drawProjection() 
+    {
+        if(fireAction.IsPressed())
+        {
+            firingBehaviour.drawLine(lineRenderer, equippedDrone.transform, powerValue, equippedDrone.getMass());
+        } else
+        {
+            lineRenderer.enabled = false;
+        }
+        
     }
 }

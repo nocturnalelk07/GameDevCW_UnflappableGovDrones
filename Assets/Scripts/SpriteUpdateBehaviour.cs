@@ -10,7 +10,7 @@ public class SpriteUpdateBehaviour : MonoBehaviour
     private int count = 0;
 
 
-    void Start()
+    public void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
