@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -13,7 +14,12 @@ public class firingBehaviour : MonoBehaviour
     private Vector3 point;
     [Header("display controls")] //these affect how smooth the line appears
     [SerializeField][Range(10, 100)] private int linePoints = 25;
-    [SerializeField][Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f; 
+    [SerializeField][Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
+
+    //variables for firing the turret
+    private bool readyToFire = true;
+    private Vector2 fireForceDirection;
+    private float droneMass;
 
     public void Awake()
     {
@@ -27,9 +33,20 @@ public class firingBehaviour : MonoBehaviour
         }
     }
 
-    public void fire() 
+    public void fire(droneBehaviour drone, float power) 
     {
-    
+        if (readyToFire)
+        {
+            droneMass = drone.getMass();
+
+            //work out the components of the fire force with trig
+            fireForceDirection = drone.transform.right;
+            fireForceDirection.x *= power;
+            fireForceDirection.y *= power;
+
+            drone.GetComponent<Rigidbody2D>().AddForce(fireForceDirection, ForceMode2D.Impulse);
+            readyToFire = false;
+        }
     }
 
     //uses suvat equations to calculate a trajectory.

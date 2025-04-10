@@ -15,7 +15,7 @@ public class turretBehaviour : MonoBehaviour
     private const string FIRE_ACTION = "Fire";
     private const string POWER_ACTION = "Power";
     private const string DRONENAME = "drone";
-
+    
     [SerializeField] private GameObject turret;
     private SpriteUpdateBehaviour turretSpriteUpdater;
     private Sprite[] turretBarrelSpriteArray;
@@ -111,6 +111,12 @@ public class turretBehaviour : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
+        if (!fireAction.IsPressed())
+        {
+            //when the player lets go of the fire button, fire drone
+            equippedDrone.GetComponent<Rigidbody2D>().gravityScale = 1;
+            firingBehaviour.fire(equippedDrone, powerValue);
+        }
     }
 
     private void drawProjection() 
@@ -124,4 +130,5 @@ public class turretBehaviour : MonoBehaviour
         }
         
     }
+
 }
