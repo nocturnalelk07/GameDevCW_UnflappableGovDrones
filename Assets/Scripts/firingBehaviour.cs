@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ public class firingBehaviour : MonoBehaviour
     private bool readyToFire = true;
     private Vector2 fireForceDirection;
     private float droneMass;
+    private LayerMask collisionLayerMask;
 
     public void Awake()
     {
@@ -35,6 +37,7 @@ public class firingBehaviour : MonoBehaviour
 
     public void fire(droneBehaviour drone, float power) 
     {
+
         if (readyToFire)
         {
             droneMass = drone.getMass();
@@ -51,9 +54,16 @@ public class firingBehaviour : MonoBehaviour
 
     //uses suvat equations to calculate a trajectory.
     //
-    public void drawLine(LineRenderer lr, Transform firingPosition, float force, float droneMass)
+    public void drawLine(LineRenderer lr, Transform firingPosition, float force, float droneMass, droneBehaviour drone)
     {
-        Debug.Log("drawing line");
+        int droneLayer = drone.gameObject.layer;
+        for (int count = 0; count < 32; count++)
+        {
+            if (!Physics.GetIgnoreLayerCollision(droneLayer, count))
+            {
+                collisionLayerMask |= 1 << count;
+            }
+        }
         lr.enabled = true;
         lr.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
         startPosition = firingPosition.position;
@@ -67,6 +77,17 @@ public class firingBehaviour : MonoBehaviour
             point.y = startPosition.y + startVelocity.y * time + (Physics.gravity.y / 2f * time * time);
 
             lr.SetPosition(i, point);
+
+            Vector3 lastPosition = lr.GetPosition(i - 1);
+
+            if (Physics.Raycast(lastPosition, (point - lastPosition).normalized,
+                out RaycastHit hit, (point - lastPosition).magnitude, collisionLayerMask))
+            {
+                Debug.Log("hit layer");
+                lr.SetPosition(i, hit.point);
+                lr.positionCount = i + 1;
+                return;
+            }
         }
     }
 }

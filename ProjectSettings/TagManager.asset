@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ground
   - Water
   - UI
-  - 
+  - hittable
   - 
   - 
   - 
@@ -41,11 +41,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: ground
+    uniqueID: 1709145227
+    locked: 0
   - name: Turret
     uniqueID: 2633442417
     locked: 0
   - name: Drone
     uniqueID: 1523719117
+    locked: 0
+  - name: line layer
+    uniqueID: 1347637947
     locked: 0
   m_RenderingLayers:
   - Default

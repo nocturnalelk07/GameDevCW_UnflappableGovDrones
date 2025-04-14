@@ -13,8 +13,6 @@ public class turretBehaviour : MonoBehaviour
     private const string ACTION_MAP_NAME = "Player";
     private const string MOVE_ACTION = "Move";
     private const string FIRE_ACTION = "Fire";
-    private const string POWER_ACTION = "Power";
-    private const string DRONENAME = "drone";
     
     [SerializeField] private GameObject turret;
     private SpriteUpdateBehaviour turretSpriteUpdater;
@@ -37,9 +35,14 @@ public class turretBehaviour : MonoBehaviour
     [SerializeField] private firingBehaviour firingBehaviour;
     [SerializeField] private LineRenderer lineRenderer;
 
+    [Header("state machine variables")]
+    private ITurretState state = new TurretReadyState();
+    private bool hasFired = false;
+
     [Header("other")]
     private Rigidbody2D rb2d;
     [SerializeField] private GameObject barrelPivotPoint;
+    [SerializeField] private SpriteUpdateBehaviour turretBaseSprite;
 
     private void Awake()
     {
@@ -49,11 +52,12 @@ public class turretBehaviour : MonoBehaviour
         fireAction.performed += Fire;
         rb2d = GetComponent<Rigidbody2D>();
         turretSpriteUpdater = turret.GetComponent<SpriteUpdateBehaviour>();
+        state.Enter(this);
     }
 
     private void Start()
     {
-        turretBarrelSpriteArray = turretSpriteUpdater.getSprites();
+        turretBarrelSpriteArray = turretSpriteUpdater.getSprites(); 
     }
 
     private void FixedUpdate()
@@ -70,6 +74,11 @@ public class turretBehaviour : MonoBehaviour
         }
         drawProjection();
         
+    }
+
+    private void Update()
+    {
+        updateState();
     }
 
     private void OnEnable()
@@ -116,6 +125,7 @@ public class turretBehaviour : MonoBehaviour
             //when the player lets go of the fire button, fire drone
             equippedDrone.GetComponent<Rigidbody2D>().gravityScale = 1;
             firingBehaviour.fire(equippedDrone, powerValue);
+            hasFired = true;
         }
     }
 
@@ -123,7 +133,7 @@ public class turretBehaviour : MonoBehaviour
     {
         if(fireAction.IsPressed())
         {
-            firingBehaviour.drawLine(lineRenderer, equippedDrone.transform, powerValue, equippedDrone.getMass());
+            firingBehaviour.drawLine(lineRenderer, equippedDrone.transform, powerValue, equippedDrone.getMass(), equippedDrone);
         } else
         {
             lineRenderer.enabled = false;
@@ -131,4 +141,25 @@ public class turretBehaviour : MonoBehaviour
         
     }
 
+    private void updateState()
+    {
+        //updates the finite state machine
+        ITurretState newState = state.Tick(this);
+
+        if (newState != null)
+        {
+            state.Exit(this);
+            state = newState;
+            newState.Enter(this);
+        }
+    }
+
+    public void setBaseSprite(int index)
+    {
+        turretBaseSprite.setSprite(index);
+    }
+    public bool getHasFired()
+    {
+        return hasFired;
+    }
 }
