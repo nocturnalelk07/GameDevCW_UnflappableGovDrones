@@ -1,15 +1,18 @@
+using UnityEditor;
 using UnityEngine;
 
-public class DroneIdleState : IDroneState
+public class DroneFiringState : IDroneState
 {
     public void Enter(droneBehaviour drone)
     {
+        //firing animation starts
         
         return;
     }
 
     public void Exit(droneBehaviour drone)
     {
+        //garbage collection should handle destruction
         return;
     }
 
@@ -17,9 +20,10 @@ public class DroneIdleState : IDroneState
     {
         if (drone.getMoving())
         {
-            return new DroneFiringState();
+            return null;
         }
-
-        return null;
+            return new DroneIdleState();
     }
+
+    
 }

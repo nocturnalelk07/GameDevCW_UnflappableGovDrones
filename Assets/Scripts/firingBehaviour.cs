@@ -56,6 +56,7 @@ public class firingBehaviour : MonoBehaviour
     //
     public void drawLine(LineRenderer lr, Transform firingPosition, float force, float droneMass, droneBehaviour drone)
     {
+        collisionLayerMask = new LayerMask();
         int droneLayer = drone.gameObject.layer;
         for (int count = 0; count < 32; count++)
         {
@@ -78,12 +79,16 @@ public class firingBehaviour : MonoBehaviour
 
             lr.SetPosition(i, point);
 
+            //code for stopping line when it hits an object, but it doesnt work
             Vector3 lastPosition = lr.GetPosition(i - 1);
 
-            if (Physics.Raycast(lastPosition, (point - lastPosition).normalized,
-                out RaycastHit hit, (point - lastPosition).magnitude, collisionLayerMask))
+            if (Physics.Raycast(lastPosition,
+                (point - lastPosition).normalized,
+                out RaycastHit hit,
+                (point - lastPosition).magnitude,
+                collisionLayerMask))
             {
-                Debug.Log("hit layer");
+                Debug.Log("hit something");
                 lr.SetPosition(i, hit.point);
                 lr.positionCount = i + 1;
                 return;
