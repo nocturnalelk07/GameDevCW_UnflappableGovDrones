@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//state for a turret that is ready to fire
 public class TurretReadyState: ITurretState
 {
     private const int BaseOnSpriteIndex = 0; 
@@ -7,6 +8,10 @@ public class TurretReadyState: ITurretState
     {
         //set the turret sprite to the ready sprite
         turret.setBaseSprite(BaseOnSpriteIndex);
+
+        //reset the drone and its' gravity
+        turret.getDrone().returnToTurret();
+        
     }
 
     public void Exit(turretBehaviour turret)

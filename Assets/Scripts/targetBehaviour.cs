@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class targetBehaviour : MonoBehaviour
+public class targetBehaviour : hittable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void noHealth()
     {
-        
-    }
+        //targets play a death animation and destroy themselves
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //play death effect
+
+        //give player points for killing this
+
+        //destroy itself
+        Destroy(gameObject);
     }
 }

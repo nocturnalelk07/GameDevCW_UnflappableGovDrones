@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - hittable
-  - 
+  - drone
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Turret
     uniqueID: 2633442417
+    locked: 0
+  - name: hittable
+    uniqueID: 4059712685
     locked: 0
   - name: Drone
     uniqueID: 1523719117

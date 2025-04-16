@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+//state for a turret that has fired and is waiting to reload
 public class TurretWaitingState : ITurretState
 {
     private const int BaseOnSpriteIndex = 1;
@@ -7,6 +9,7 @@ public class TurretWaitingState : ITurretState
     public void Enter(turretBehaviour turret)
     {
         turret.setBaseSprite(BaseOnSpriteIndex);
+        turret.getDrone().setMoving(true);
     }
 
     public void Exit(turretBehaviour turret)

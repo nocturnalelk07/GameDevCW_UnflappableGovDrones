@@ -52,12 +52,13 @@ public class turretBehaviour : MonoBehaviour
         fireAction.performed += Fire;
         rb2d = GetComponent<Rigidbody2D>();
         turretSpriteUpdater = turret.GetComponent<SpriteUpdateBehaviour>();
-        state.Enter(this);
+        
     }
 
     private void Start()
     {
-        turretBarrelSpriteArray = turretSpriteUpdater.getSprites(); 
+        turretBarrelSpriteArray = turretSpriteUpdater.getSprites();
+        state.Enter(this);
     }
 
     private void FixedUpdate()
@@ -161,5 +162,14 @@ public class turretBehaviour : MonoBehaviour
     public bool getHasFired()
     {
         return hasFired;
+    }
+    public void setHasFired(bool value)
+    {
+        hasFired = value;
+    }
+
+    public droneBehaviour getDrone()
+    {
+        return equippedDrone;
     }
 }

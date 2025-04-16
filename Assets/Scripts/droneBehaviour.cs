@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class droneBehaviour : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private float checkTime;
+    private const string droneStr = "drone";
+    private Vector2 originalPosition;
 
     [Header ("state machine")]
     private IDroneState state = new DroneIdleState();
@@ -13,8 +17,10 @@ public class droneBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        originalPosition = transform.position;
         rb2d = GetComponent<Rigidbody2D>();
         state.Enter(this);
+        gameObject.layer = LayerMask.NameToLayer(droneStr);
     }
     public float getMass()
     {
@@ -26,7 +32,6 @@ public class droneBehaviour : MonoBehaviour
         checkTime += Time.deltaTime;
         if (checkTime >= 1)
         {
-            Debug.Log("check moving");
             checkMoving();
         }
         
@@ -55,6 +60,10 @@ public class droneBehaviour : MonoBehaviour
     {
         return moving;
     }
+    public void setMoving(bool value)
+    {
+        moving = value;
+    } 
 
     public bool checkMoving()
     {
@@ -78,4 +87,9 @@ public class droneBehaviour : MonoBehaviour
         return moving;
     }
 
+    public void returnToTurret()
+    {
+        transform.position = originalPosition;
+        rb2d.gravityScale = 0;
+    }
 }
