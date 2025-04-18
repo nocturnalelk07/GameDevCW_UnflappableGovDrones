@@ -8,9 +8,6 @@ public class TurretReadyState: ITurretState
     {
         //set the turret sprite to the ready sprite
         turret.setBaseSprite(BaseOnSpriteIndex);
-
-        //reset the drone and its' gravity
-        turret.getDrone().returnToTurret();
         
     }
 
@@ -20,8 +17,8 @@ public class TurretReadyState: ITurretState
     }
     public ITurretState Tick(turretBehaviour turret)
     {
-        //if the drone has been fired change state
-        if (turret.getHasFired())
+        //if the turret is unable to fire
+        if (!turret.canFire())
         {
             return new TurretWaitingState();
         } else

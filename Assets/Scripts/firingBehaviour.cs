@@ -18,8 +18,7 @@ public class firingBehaviour : MonoBehaviour
     [SerializeField][Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
 
     //variables for firing the turret
-    private bool readyToFire = true;
-    private Vector2 fireForceDirection;
+    Vector2 fireForceDirection;
     private float droneMass;
     private LayerMask collisionLayerMask;
 
@@ -37,19 +36,14 @@ public class firingBehaviour : MonoBehaviour
 
     public void fire(droneBehaviour drone, float power) 
     {
+        droneMass = drone.getMass();
 
-        if (readyToFire)
-        {
-            droneMass = drone.getMass();
+        Vector2 fireForceDirection = drone.transform.right;
+        fireForceDirection.x *= power;
+        fireForceDirection.y *= power;
 
-            //work out the components of the fire force with trig
-            fireForceDirection = drone.transform.right;
-            fireForceDirection.x *= power;
-            fireForceDirection.y *= power;
-
-            drone.GetComponent<Rigidbody2D>().AddForce(fireForceDirection, ForceMode2D.Impulse);
-            readyToFire = false;
-        }
+        drone.getRB2D().gravityScale = 1;
+        drone.GetComponent<Rigidbody2D>().AddForce(fireForceDirection, ForceMode2D.Impulse);
     }
 
     //uses suvat equations to calculate a trajectory.

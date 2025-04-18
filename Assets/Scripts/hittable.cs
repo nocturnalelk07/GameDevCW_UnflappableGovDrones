@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class hittable : MonoBehaviour
 {
     private const string hittableStr = "hittable";
-    [SerializeField] private float health = 10;
+    [SerializeField] protected float health;
 
 
     private void Awake()
@@ -28,3 +28,4 @@ public abstract class hittable : MonoBehaviour
     public abstract void noHealth();
 
 }
+    

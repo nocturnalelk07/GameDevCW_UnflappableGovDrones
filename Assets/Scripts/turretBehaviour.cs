@@ -8,8 +8,7 @@ public class turretBehaviour : MonoBehaviour
 {
     //this is the class for the turret that the player controls
 
-    [SerializeField] private int MAXIMUM_POWER = 100;
-    [SerializeField] private int MINIMUM_POWER = 10;
+    
     private const string ACTION_MAP_NAME = "Player";
     private const string MOVE_ACTION = "Move";
     private const string FIRE_ACTION = "Fire";
@@ -18,25 +17,26 @@ public class turretBehaviour : MonoBehaviour
     private SpriteUpdateBehaviour turretSpriteUpdater;
     private Sprite[] turretBarrelSpriteArray;
 
+    [Header("turret firing parameters")]
     [SerializeField] private int rotationalSpeed;
-
-    //player input variables
-    [SerializeField] private InputActionAsset actions;
+    [SerializeField] private int MAXIMUM_POWER = 100;
+    [SerializeField] private int MINIMUM_POWER = 10;
     private float powerValue;
     private float powerInput;
     private float powerPercent;
+
+    [SerializeField] private InputActionAsset actions;
     private int turretSpriteIndex;
     private Vector3 aimValue = new Vector3();
     private InputAction aimAction;
     private InputAction fireAction;
 
     [Header("drone Firing variables")]
-    [SerializeField] private droneBehaviour equippedDrone;
-    [SerializeField] private firingBehaviour firingBehaviour;
-    [SerializeField] private LineRenderer lineRenderer;
+    private droneBehaviour equippedDrone;
+    private LineRenderer lineRenderer;
 
     [Header("state machine variables")]
-    private ITurretState state = new TurretReadyState();
+    private ITurretState state = new TurretWaitingState();
     private bool hasFired = false;
 
     [Header("other")]
@@ -107,13 +107,11 @@ public class turretBehaviour : MonoBehaviour
         }
 
         //update the turret sprite to show the change in power on the gun
-
         //first work out the % of the maximum power as a decimal
         powerPercent = powerValue / MAXIMUM_POWER;
 
         //then we work out what index in the array of sprites to use
         turretSpriteIndex = (int)((turretBarrelSpriteArray.Length - 1) * powerPercent);
-        Debug.Log("power is: " + powerValue + " index is: " + turretSpriteIndex);
 
         //finally we set the sprite with the calculated index
         turretSpriteUpdater.setSprite(turretSpriteIndex);
@@ -121,21 +119,21 @@ public class turretBehaviour : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!fireAction.IsPressed())
+        if (!fireAction.IsPressed() && state.GetType() == typeof(TurretReadyState))
         {
             //when the player lets go of the fire button, fire drone
-            equippedDrone.GetComponent<Rigidbody2D>().gravityScale = 1;
-            firingBehaviour.fire(equippedDrone, powerValue);
+            firingBehaviour.instance.fire(equippedDrone, powerValue);
             hasFired = true;
         }
     }
 
     private void drawProjection() 
     {
-        if(fireAction.IsPressed())
+        if (fireAction.IsPressed() && equippedDrone != null)
         {
-            firingBehaviour.drawLine(lineRenderer, equippedDrone.transform, powerValue, equippedDrone.getMass(), equippedDrone);
-        } else
+            equippedDrone.transform.rotation = barrelPivotPoint.transform.rotation;
+            firingBehaviour.instance.drawLine(lineRenderer, equippedDrone.transform, powerValue, equippedDrone.getMass(), equippedDrone);
+        } else if(lineRenderer != null)
         {
             lineRenderer.enabled = false;
         }
@@ -171,5 +169,23 @@ public class turretBehaviour : MonoBehaviour
     public droneBehaviour getDrone()
     {
         return equippedDrone;
+    }
+
+    public void equipDrone(droneBehaviour newDrone)
+    {
+        
+        equippedDrone = Instantiate(newDrone, barrelPivotPoint.transform.position, barrelPivotPoint.transform.rotation);
+        lineRenderer = equippedDrone.GetComponent<LineRenderer>();
+    }
+
+    public bool canFire()
+    {
+        if (equippedDrone != null && equippedDrone.getState().GetType() == typeof(DroneIdleState))
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 }

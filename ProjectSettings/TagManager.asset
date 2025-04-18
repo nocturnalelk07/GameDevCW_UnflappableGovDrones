@@ -56,5 +56,8 @@ TagManager:
   - name: Drone
     uniqueID: 1523719117
     locked: 0
+  - name: UI
+    uniqueID: 848775491
+    locked: 0
   m_RenderingLayers:
   - Default

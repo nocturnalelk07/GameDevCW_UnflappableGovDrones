@@ -8,15 +8,14 @@ public class DroneFiringState : IDroneState
     {
         //firing animation starts
         drone.GetComponent<Animator>().SetTrigger(triggerName);
+        drone.getRB2D().gravityScale = 1;
         return;
     }
 
     public void Exit(droneBehaviour drone)
     {
-        //tell the turret that it has finished firing
-        drone.GetComponentInParent<turretBehaviour>().setHasFired(false);
-
         //garbage collection should handle destruction
+        drone.destroyThis();
         return;
     }
 

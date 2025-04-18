@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3396868612555706799}
   - component: {fileID: 321230621635031116}
   - component: {fileID: 3399247283659097314}
-  - component: {fileID: 8748039108129518890}
   - component: {fileID: 8539767746948144361}
   - component: {fileID: 2987145607874081697}
+  - component: {fileID: -4349101155615639122}
   m_Layer: 0
   m_Name: basicDrone
   m_TagString: Untagged
@@ -31,9 +31,9 @@ Transform:
   m_GameObject: {fileID: 2931851291676130233}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.09454, y: 0.44320834, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1.1666667}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4396618640837547283}
   m_Father: {fileID: 0}
@@ -151,18 +151,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.0022608638, y: 0}
   m_Radius: 0.52486986
---- !u!114 &8748039108129518890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2931851291676130233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d3ec3ff60f22a4aa3f2a853d342be3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &8539767746948144361
 Rigidbody2D:
   serializedVersion: 5
@@ -297,6 +285,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-4349101155615639122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931851291676130233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d301e8b79970984399c052e078c6bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3068876129762533580
 GameObject:
   m_ObjectHideFlags: 0

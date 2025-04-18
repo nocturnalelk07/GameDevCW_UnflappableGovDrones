@@ -9,7 +9,6 @@ public class TurretWaitingState : ITurretState
     public void Enter(turretBehaviour turret)
     {
         turret.setBaseSprite(BaseOnSpriteIndex);
-        turret.getDrone().setMoving(true);
     }
 
     public void Exit(turretBehaviour turret)
@@ -19,8 +18,8 @@ public class TurretWaitingState : ITurretState
 
     public ITurretState Tick(turretBehaviour turret)
     {
-        //if the drone has been fired change state
-        if (!turret.getHasFired())
+        //if the turret is allowed to fire
+        if (turret.canFire())
         {
             return new TurretReadyState();
         }

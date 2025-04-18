@@ -4,7 +4,7 @@ public class DroneIdleState : IDroneState
 {
     public void Enter(droneBehaviour drone)
     {
-        
+        drone.getRB2D().gravityScale = 0;
         return;
     }
 

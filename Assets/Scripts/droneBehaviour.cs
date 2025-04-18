@@ -3,29 +3,31 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(LineRenderer))]
 public class droneBehaviour : MonoBehaviour
 {
-    private Rigidbody2D rb2d;
+    protected Rigidbody2D rb2d;
     private float checkTime;
-    private const string droneStr = "drone";
-    private Vector2 originalPosition;
+    private string droneStr = "drone";
+    //the name of the drone type
+    protected string droneName;
+    protected Vector2 originalPosition;
+    protected Quaternion originalRotation;
 
     [Header ("state machine")]
-    private IDroneState state = new DroneIdleState();
-    private bool movingPreviously = false;
-    private bool moving = false;
+    protected IDroneState state = new DroneIdleState();
+    protected bool movingPreviously = false;
+    protected bool moving = false;
 
     private void Awake()
     {
-        originalPosition = transform.position;
         rb2d = GetComponent<Rigidbody2D>();
         state.Enter(this);
         gameObject.layer = LayerMask.NameToLayer(droneStr);
+        originalPosition = transform.position;
+        originalRotation = transform.rotation;
     }
-    public float getMass()
-    {
-        return rb2d.mass;
-    }
+    
 
     private void Update()
     {
@@ -51,19 +53,11 @@ public class droneBehaviour : MonoBehaviour
         }
     }
 
-    public Rigidbody2D getRB2D()
-    {
-        return rb2d;
-    }
-
-    public bool getMoving()
-    {
-        return moving;
-    }
-    public void setMoving(bool value)
-    {
-        moving = value;
-    } 
+    public Rigidbody2D getRB2D() { return rb2d; }
+    public bool getMoving() { return moving; }
+    public void setMoving(bool value) { moving = value; } 
+    public float getMass() { return rb2d.mass; }
+    public IDroneState getState() { return state; }
 
     public bool checkMoving()
     {
@@ -87,9 +81,8 @@ public class droneBehaviour : MonoBehaviour
         return moving;
     }
 
-    public void returnToTurret()
+    public void destroyThis()
     {
-        transform.position = originalPosition;
-        rb2d.gravityScale = 0;
+        Destroy(gameObject);
     }
 }
