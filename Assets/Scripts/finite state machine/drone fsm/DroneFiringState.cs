@@ -4,24 +4,25 @@ using UnityEngine;
 public class DroneFiringState : IDroneState
 {
     private const string triggerName = "TrFired";
-    public void Enter(droneBehaviour drone)
+    public void Enter(DroneBaseClass drone)
     {
+        Debug.Log("firing state");
         //firing animation starts
-        drone.GetComponent<Animator>().SetTrigger(triggerName);
+        drone.GetAnimator().SetTrigger(triggerName);
         drone.getRB2D().gravityScale = 1;
         return;
     }
 
-    public void Exit(droneBehaviour drone)
+    public void Exit(DroneBaseClass drone)
     {
-        //garbage collection should handle destruction
+        //destroys the drone, not the most efficient option but that wont be an issue with so few drones, a possible candidate for the object pooling pattern
         drone.destroyThis();
         return;
     }
 
-    public IDroneState Tick(droneBehaviour drone)
+    public IDroneState Tick(DroneBaseClass drone)
     {
-        if (drone.getMoving())
+        if (drone.getIsMoving())
         {
             return null;
         }

@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class BasicDrone : droneBehaviour
-{
-    SerializeField droneMass;
+public class BasicDrone : DroneBaseClass
+{//this is the basic drone, it doesnt do anything special, essentially implements the base class
 
-    private void Awake()
+    public override void activate()
     {
-        getRB2D();
+        //do nothing because this is a basic drone
     }
-    //this is the basic drone, it doesnt do anything special and is fairly heavy
+
+    public override void destroyEffects()
+    {
+        //nothing for now
+    }
 }

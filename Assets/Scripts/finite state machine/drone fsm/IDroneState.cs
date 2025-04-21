@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IDroneState
 {
-    public IDroneState Tick(droneBehaviour drone);
-    public void Enter(droneBehaviour drone);
-    public void Exit(droneBehaviour drone);
+    public IDroneState Tick(DroneBaseClass drone);
+    public void Enter(DroneBaseClass drone);
+    public void Exit(DroneBaseClass drone);
 }

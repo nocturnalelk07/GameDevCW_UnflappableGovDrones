@@ -5356,7 +5356,7 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: -4349101155615639122, guid: cee2ad05064866b47a6a7eee8bb25629, type: 3}
-          m_ObjectArgumentAssemblyTypeName: droneBehaviour, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: DroneBaseClass, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

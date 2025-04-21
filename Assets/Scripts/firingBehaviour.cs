@@ -34,31 +34,22 @@ public class firingBehaviour : MonoBehaviour
         }
     }
 
-    public void fire(droneBehaviour drone, float power) 
+    public void fire(DroneBaseClass drone, float power) 
     {
-        droneMass = drone.getMass();
 
         Vector2 fireForceDirection = drone.transform.right;
         fireForceDirection.x *= power;
         fireForceDirection.y *= power;
 
         drone.getRB2D().gravityScale = 1;
-        drone.GetComponent<Rigidbody2D>().AddForce(fireForceDirection, ForceMode2D.Impulse);
+        drone.getRB2D().AddForce(fireForceDirection, ForceMode2D.Impulse);
     }
 
     //uses suvat equations to calculate a trajectory.
-    //
-    public void drawLine(LineRenderer lr, Transform firingPosition, float force, float droneMass, droneBehaviour drone)
+    public void drawLine(LineRenderer lr, float force, DroneBaseClass drone)
     {
-        collisionLayerMask = new LayerMask();
-        int droneLayer = drone.gameObject.layer;
-        for (int count = 0; count < 32; count++)
-        {
-            if (!Physics.GetIgnoreLayerCollision(droneLayer, count))
-            {
-                collisionLayerMask |= 1 << count;
-            }
-        }
+        droneMass = drone.getMass();
+        Transform firingPosition = drone.transform;
         lr.enabled = true;
         lr.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
         startPosition = firingPosition.position;
@@ -72,21 +63,6 @@ public class firingBehaviour : MonoBehaviour
             point.y = startPosition.y + startVelocity.y * time + (Physics.gravity.y / 2f * time * time);
 
             lr.SetPosition(i, point);
-
-            //code for stopping line when it hits an object, but it doesnt work
-            Vector3 lastPosition = lr.GetPosition(i - 1);
-
-            if (Physics.Raycast(lastPosition,
-                (point - lastPosition).normalized,
-                out RaycastHit hit,
-                (point - lastPosition).magnitude,
-                collisionLayerMask))
-            {
-                Debug.Log("hit something");
-                lr.SetPosition(i, hit.point);
-                lr.positionCount = i + 1;
-                return;
-            }
         }
     }
 }

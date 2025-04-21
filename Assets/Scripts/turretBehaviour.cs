@@ -32,7 +32,7 @@ public class turretBehaviour : MonoBehaviour
     private InputAction fireAction;
 
     [Header("drone Firing variables")]
-    private droneBehaviour equippedDrone;
+    private DroneBaseClass equippedDrone;
     private LineRenderer lineRenderer;
 
     [Header("state machine variables")]
@@ -43,6 +43,7 @@ public class turretBehaviour : MonoBehaviour
     private Rigidbody2D rb2d;
     [SerializeField] private GameObject barrelPivotPoint;
     [SerializeField] private SpriteUpdateBehaviour turretBaseSprite;
+
 
     private void Awake()
     {
@@ -73,13 +74,18 @@ public class turretBehaviour : MonoBehaviour
         {
             OnAdjustPower();
         }
-        drawProjection();
+        
         
     }
 
     private void Update()
     {
         updateState();
+        drawProjection();
+        if (equippedDrone != null)
+        {
+            equippedDrone.transform.rotation = barrelPivotPoint.transform.rotation;
+        }
     }
 
     private void OnEnable()
@@ -123,7 +129,6 @@ public class turretBehaviour : MonoBehaviour
         {
             //when the player lets go of the fire button, fire drone
             firingBehaviour.instance.fire(equippedDrone, powerValue);
-            hasFired = true;
         }
     }
 
@@ -131,8 +136,7 @@ public class turretBehaviour : MonoBehaviour
     {
         if (fireAction.IsPressed() && equippedDrone != null)
         {
-            equippedDrone.transform.rotation = barrelPivotPoint.transform.rotation;
-            firingBehaviour.instance.drawLine(lineRenderer, equippedDrone.transform, powerValue, equippedDrone.getMass(), equippedDrone);
+            firingBehaviour.instance.drawLine(lineRenderer, powerValue, equippedDrone);
         } else if(lineRenderer != null)
         {
             lineRenderer.enabled = false;
@@ -166,16 +170,16 @@ public class turretBehaviour : MonoBehaviour
         hasFired = value;
     }
 
-    public droneBehaviour getDrone()
-    {
-        return equippedDrone;
-    }
+    public DroneBaseClass getDrone() { return equippedDrone; }
 
-    public void equipDrone(droneBehaviour newDrone)
+    public void equipDrone(DroneBaseClass newDrone)
     {
+        if (equippedDrone == null)
+        {
+            equippedDrone = Instantiate(newDrone, barrelPivotPoint.transform.position, barrelPivotPoint.transform.rotation);
+        }
         
-        equippedDrone = Instantiate(newDrone, barrelPivotPoint.transform.position, barrelPivotPoint.transform.rotation);
-        lineRenderer = equippedDrone.GetComponent<LineRenderer>();
+        lineRenderer = equippedDrone.GetLineRenderer();
     }
 
     public bool canFire()
