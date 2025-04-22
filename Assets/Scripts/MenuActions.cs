@@ -16,9 +16,11 @@ public class MenuActions : MonoBehaviour
 
 
     //settings menu fuctions
-    public void ChangeVolume()
+    public void SetVolume(float newVolume)
     {
-
+        PlayerPrefs.SetFloat("Volume", newVolume);
+        AudioListener.volume = PlayerPrefs.GetFloat("Volume");
+        //Debug.Log("volume set");
     }
 
     //leaderboard functions

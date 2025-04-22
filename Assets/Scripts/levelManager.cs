@@ -16,6 +16,7 @@ public class levelManager : MonoBehaviour
     private const string remainingBaseString = "drones remaining: ";
     private int dronesRemaining;
     private int points;
+    [SerializeField] private GameObject menu; 
 
     public void Awake()
     {
@@ -49,12 +50,27 @@ public class levelManager : MonoBehaviour
     {
         if (dronesRemaining <= 0 || targetsRemaining <= 0)
         {
-            //if there are no drones left end the level
+            //if there are no drones left or the player got all the targets, end the level
             endLevel();
         }
     }
     //all the code that should be run when the level ends, adds up score etc.
     private void endLevel()
+    {
+        //todo: add points to the players' total
+
+        //unlock next level if they got all targets
+        if (targetsRemaining <= 0)
+        {
+            unlockNextLevel();
+        }
+
+        //give player the option to try again or go back to menu with popup
+        //display their score
+        //tell them if they won or not
+        menu.SetActive(true);
+    }
+    private void unlockNextLevel()
     {
 
     }
