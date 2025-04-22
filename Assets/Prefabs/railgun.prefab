@@ -188,7 +188,6 @@ MonoBehaviour:
   MAXIMUM_POWER: 100
   MINIMUM_POWER: 10
   actions: {fileID: -944628639613478452, guid: 0ad57dac64ee5e64bbb9a82d5bc5fd2f, type: 3}
-  firingBehaviour: {fileID: 0}
   barrelPivotPoint: {fileID: 6194539488800904282}
   turretBaseSprite: {fileID: 1492445126137641443}
 --- !u!114 &5623550355152797258
@@ -276,6 +275,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7302815b-779b-417a-9814-ad88dfba37ef
+    m_ActionName: 'Player/ActivateDrone[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

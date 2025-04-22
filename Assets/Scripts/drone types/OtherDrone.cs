@@ -5,10 +5,14 @@ public class OtherDrone : DroneBaseClass
     public override void activate()
     {
         //do something really special
-
+        if (state.GetType() == typeof(DroneFiringState))
+        {
+            //only activate if the drone has been fired
+            Debug.Log("activate while flying!");
+        }
     }
 
-    public override void destroyEffects()
+    protected override void destroyEffects()
     {
         
     }

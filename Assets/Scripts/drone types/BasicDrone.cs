@@ -8,7 +8,7 @@ public class BasicDrone : DroneBaseClass
         //do nothing because this is a basic drone
     }
 
-    public override void destroyEffects()
+    protected override void destroyEffects()
     {
         //nothing for now
     }

@@ -8,11 +8,13 @@ public class turretBehaviour : MonoBehaviour
 {
     //this is the class for the turret that the player controls
 
-    
+    [Header("constant strings")]
     private const string ACTION_MAP_NAME = "Player";
     private const string MOVE_ACTION = "Move";
     private const string FIRE_ACTION = "Fire";
-    
+    private const string DRONE_ACTION = "ActivateDrone";
+
+    [Header("turret parts and sprites")]
     [SerializeField] private GameObject turret;
     private SpriteUpdateBehaviour turretSpriteUpdater;
     private Sprite[] turretBarrelSpriteArray;
@@ -25,11 +27,13 @@ public class turretBehaviour : MonoBehaviour
     private float powerInput;
     private float powerPercent;
 
+    [Header("inputs")]
     [SerializeField] private InputActionAsset actions;
     private int turretSpriteIndex;
     private Vector3 aimValue = new Vector3();
     private InputAction aimAction;
     private InputAction fireAction;
+    private InputAction droneAbility;
 
     [Header("drone Firing variables")]
     private DroneBaseClass equippedDrone;
@@ -50,6 +54,7 @@ public class turretBehaviour : MonoBehaviour
         powerValue = MINIMUM_POWER;
         aimAction = actions.FindActionMap(ACTION_MAP_NAME).FindAction(MOVE_ACTION);
         fireAction = actions.FindActionMap(ACTION_MAP_NAME).FindAction(FIRE_ACTION);
+        droneAbility = actions.FindActionMap(ACTION_MAP_NAME).FindAction(DRONE_ACTION);
         fireAction.performed += Fire;
         rb2d = GetComponent<Rigidbody2D>();
         turretSpriteUpdater = turret.GetComponent<SpriteUpdateBehaviour>();
@@ -81,11 +86,13 @@ public class turretBehaviour : MonoBehaviour
     private void Update()
     {
         updateState();
+        
         drawProjection();
         if (equippedDrone != null)
         {
             equippedDrone.transform.rotation = barrelPivotPoint.transform.rotation;
         }
+        useAbility();
     }
 
     private void OnEnable()
@@ -144,6 +151,15 @@ public class turretBehaviour : MonoBehaviour
         
     }
 
+    //check to see if the input has been pressed to use a drone's ability
+    private void useAbility()
+    {
+        if (equippedDrone != null && droneAbility.triggered)
+        {
+            equippedDrone.activate();
+        }
+    }
+
     private void updateState()
     {
         //updates the finite state machine
@@ -172,9 +188,11 @@ public class turretBehaviour : MonoBehaviour
 
     public DroneBaseClass getDrone() { return equippedDrone; }
 
+    //method for spawning a drone
     public void equipDrone(DroneBaseClass newDrone)
     {
-        if (equippedDrone == null)
+        //if the turret doesnt have a drone, the drone type is allowed for the level, and not all drones have been used for the level
+        if (equippedDrone == null && levelManager.instance.checkType(newDrone) && levelManager.instance.getDronesRemaining() > 0)
         {
             equippedDrone = Instantiate(newDrone, barrelPivotPoint.transform.position, barrelPivotPoint.transform.rotation);
         }

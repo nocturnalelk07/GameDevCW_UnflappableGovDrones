@@ -6,9 +6,18 @@ public class targetBehaviour : hittable
     {
         //play death effect
 
-        //give player points for killing this
 
+        //give player points for killing this
+        levelManager.instance.addPoints();
+        levelManager.instance.decrementTargetsRemaining();
+        levelManager.instance.checkGameOver();
         //destroy itself
+
         Destroy(gameObject);
+    }
+
+    private void Awake()
+    {
+        levelManager.instance.incrementTargetsRemaining();
     }
 }

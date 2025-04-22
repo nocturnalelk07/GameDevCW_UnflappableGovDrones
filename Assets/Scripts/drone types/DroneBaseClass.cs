@@ -25,12 +25,12 @@ public abstract class DroneBaseClass : MonoBehaviour
     //concrete unity method implementations
     private void Awake()
     {
-        Debug.Log("base awake");
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
         lineRenderer = GetComponent<LineRenderer>();
         animator = GetComponent<Animator>();
         rb2d.mass = droneMass;
+        levelManager.instance.decrementDronesRemaining();
     }
     private void Start()
     {
@@ -45,7 +45,7 @@ public abstract class DroneBaseClass : MonoBehaviour
     //this is the method that drones will implement for activating any abilities they have
     public abstract void activate();
     //plays the animation, sound effect etc for when the drone destroys itself
-    public abstract void destroyEffects();
+    protected abstract void destroyEffects();
 
     //concrete methods
     //updates the state of the drone
@@ -79,7 +79,12 @@ public abstract class DroneBaseClass : MonoBehaviour
     //public methods, getters and setters
     public Rigidbody2D getRB2D() { return rb2d; }
     public bool getIsMoving() { return isMoving; }
-    public void destroyThis() { Destroy(gameObject); }
+    public void destroyThis() 
+    {
+        destroyEffects();
+        levelManager.instance.checkGameOver();
+        Destroy(gameObject);
+    }
     public IDroneState getState() { return state; }
     public float getMass() { return rb2d.mass; }
     public LineRenderer GetLineRenderer() { return lineRenderer; }
