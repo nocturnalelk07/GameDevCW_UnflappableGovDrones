@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LevelSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject[] levels;
+    [SerializeField] private levelBehaviour[] levels;
 
     void Start()
     {
