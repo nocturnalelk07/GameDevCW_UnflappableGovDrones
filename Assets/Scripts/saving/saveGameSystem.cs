@@ -7,7 +7,7 @@ using UnityEditor.Overlays;
 
 public static class saveGameSystem
 {
-    public static bool SaveGame (SaveData saveGame, string name)
+    public static bool SaveGame (saveDataClass saveGame, string name)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -25,7 +25,7 @@ public static class saveGameSystem
         return true;
     }
 
-    public static SaveData LoadGame (string name)
+    public static saveDataClass LoadGame (string name)
     {
         if (!doesSaveGameExist(name))
         {
@@ -38,8 +38,8 @@ public static class saveGameSystem
         {
             try
             {
-                SaveData myData;
-                myData = formatter.Deserialize(stream) as SaveData;
+                saveDataClass myData;
+                myData = formatter.Deserialize(stream) as saveDataClass;
                 return myData;
             } catch (Exception)
             {

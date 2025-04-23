@@ -36,4 +36,15 @@ public class MenuActions : MonoBehaviour
     {
 
     }    
+
+    public void testSave()
+    {
+        saveDataClass save = new saveDataClass();
+        save.testString = "test string woohoo";
+        saveGameSystem.SaveGame(save, "test");
+        Debug.Log(saveGameSystem.doesSaveGameExist("test") + " " + Application.persistentDataPath);
+        Debug.Log(saveGameSystem.LoadGame("test").testString);
+        saveGameSystem.DeleteSaveGame("test");
+        Debug.Log(saveGameSystem.doesSaveGameExist("test"));
+    }
 }
