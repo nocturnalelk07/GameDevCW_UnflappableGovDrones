@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class levelManager : MonoBehaviour
@@ -18,7 +19,11 @@ public class levelManager : MonoBehaviour
     private int dronesRemaining;
     private int points;
     private int levelNumber;
-    [SerializeField] private GameObject menu; 
+
+    [Header("menu variables")]
+    [SerializeField] private GameObject menu;
+    [SerializeField] private Text winLoseText;
+    [SerializeField] private Text pointsText;
 
     public void Awake()
     {
@@ -61,17 +66,10 @@ public class levelManager : MonoBehaviour
     private void endLevel()
     {
         saveDataClass saveData = saveGameSystem.LoadGame("default");
-        if (saveData != null)
+        if (saveData == null)
         {
-            Debug.Log("save was not null");
-            saveData.playerPoints += points;
-            Debug.Log(saveData.playerPoints + " " + saveData.levelUnlocked);
-        } else
-        {
-            Debug.Log("did not find save game");
             saveData = new saveDataClass();
         }
-
 
         //unlock next level if they got all targets
         if (targetsRemaining <= 0 && saveData.levelUnlocked < levelNumber)
@@ -84,9 +82,19 @@ public class levelManager : MonoBehaviour
         //display their score
         //tell them if they won or not
         menu.SetActive(true);
-
-        //for now just send back to main menu
-        SceneManager.LoadScene("Menu");
+        if (targetsRemaining <= 0)
+        {
+            Debug.Log(points);
+            saveData.playerPoints += points;
+            saveGameSystem.SaveGame(saveData, "default");
+            Debug.Log(saveData.playerPoints);
+            winLoseText.text = "You Won!";
+            pointsText.text = "Points Earnt:\n" + points;
+        } else
+        {
+            winLoseText.text = "You Lose,";
+            pointsText.text = "you get no points!";
+        }
     }
 
     public void addPoints()

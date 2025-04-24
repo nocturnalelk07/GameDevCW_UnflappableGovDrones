@@ -46,4 +46,9 @@ public class menuMovement : MonoBehaviour
         gameObject.transform.localScale = Vector2.zero;
         LeanTween.scale(gameObject, scale, duration).setEase(easeTypeScale);
     }
+
+    public float getDuration()
+    {
+        return duration;
+    }
 }
