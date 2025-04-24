@@ -223,7 +223,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 237078740227070504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2287490108674785994}
+        m_TargetAssemblyTypeName: levelBehaviour, Assembly-CSharp
+        m_MethodName: playLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2492433629353528446
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb43af38c67814eb96a3d23626c88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelNumber: 0
+  levelText: {fileID: 7116268577420808080}
+  padlock: {fileID: 2492433629353528446}
+  button: {fileID: 7203019786254132536}
 --- !u!1 &4374570245983613977
 GameObject:
   m_ObjectHideFlags: 0

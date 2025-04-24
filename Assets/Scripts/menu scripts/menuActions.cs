@@ -12,8 +12,6 @@ public class MenuActions : MonoBehaviour
         Application.Quit();
     }
 
-    //main menu functions
-
 
     //settings menu fuctions
     public void SetVolume(float newVolume)
@@ -23,28 +21,5 @@ public class MenuActions : MonoBehaviour
         //Debug.Log("volume set");
     }
 
-    //leaderboard functions
-
-
-    //level select screen functions
-    public void ChangeSelectedLevel(float i)
-    {
-
-    }
-
-    public void SelectLevel()
-    {
-
-    }    
-
-    public void testSave()
-    {
-        saveDataClass save = new saveDataClass();
-        save.testString = "test string woohoo";
-        saveGameSystem.SaveGame(save, "test");
-        Debug.Log(saveGameSystem.doesSaveGameExist("test") + " " + Application.persistentDataPath);
-        Debug.Log(saveGameSystem.LoadGame("test").testString);
-        saveGameSystem.DeleteSaveGame("test");
-        Debug.Log(saveGameSystem.doesSaveGameExist("test"));
-    }
+    //leaderboard functions 
 }
