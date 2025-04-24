@@ -21,6 +21,7 @@ public abstract class DroneBaseClass : MonoBehaviour
     [Header("other")]
     [SerializeField] protected float droneMass;
     [SerializeField] protected string droneType;
+    protected bool abilityUsed = false;
 
     //concrete unity method implementations
     private void Awake()

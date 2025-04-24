@@ -141,13 +141,16 @@ public class turretBehaviour : MonoBehaviour
 
     private void drawProjection() 
     {
-        if (fireAction.IsPressed() && equippedDrone != null)
+        if (equippedDrone != null)
         {
-            firingBehaviour.instance.drawLine(lineRenderer, powerValue, equippedDrone);
-        } else if(lineRenderer != null)
-        {
+            if (fireAction.IsPressed() && equippedDrone.getState().GetType() == typeof(DroneIdleState))
+            {
+                firingBehaviour.instance.drawLine(lineRenderer, powerValue, equippedDrone);
+            }else if(lineRenderer != null)
+            {
             lineRenderer.enabled = false;
-        }
+            }
+        } 
         
     }
 
