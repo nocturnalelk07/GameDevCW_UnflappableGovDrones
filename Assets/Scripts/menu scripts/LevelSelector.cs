@@ -9,9 +9,16 @@ public class LevelSelector : MonoBehaviour
     void Start()
     {
         //figure out which levels are unlocked
-        saveData = new saveDataClass();
-        saveGameSystem.LoadGame(PlayerPrefs.GetString("name", "default"));
-        setUpLevels();
+        saveData = saveGameSystem.LoadGame("default");
+        if (saveData == null )
+        {
+            Debug.Log("save data was null");
+            saveData = new saveDataClass();
+        } else
+        {
+            Debug.Log(saveData.levelUnlocked);
+        }
+            setUpLevels();
     }
 
     private void setUpLevels()

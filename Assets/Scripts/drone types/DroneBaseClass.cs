@@ -57,7 +57,6 @@ public abstract class DroneBaseClass : MonoBehaviour
 
         if (newState != null)
         {
-            Debug.Log(isMoving);
             state.Exit(this);
             state = newState;
             newState.Enter(this);

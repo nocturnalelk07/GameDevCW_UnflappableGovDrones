@@ -16,7 +16,7 @@ public class targetBehaviour : hittable
         Destroy(gameObject);
     }
 
-    private void Awake()
+    private void Start()
     {
         levelManager.instance.incrementTargetsRemaining();
     }

@@ -1,6 +1,7 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
@@ -16,6 +17,7 @@ public class levelManager : MonoBehaviour
     private const string remainingBaseString = "drones remaining: ";
     private int dronesRemaining;
     private int points;
+    private int levelNumber;
     [SerializeField] private GameObject menu; 
 
     public void Awake()
@@ -32,6 +34,7 @@ public class levelManager : MonoBehaviour
         points = 0;
         dronesRemaining = dronesAvailable;
         dronesRemainingText.text = remainingBaseString + dronesRemaining;
+        levelNumber = SceneManager.GetActiveScene().buildIndex;
     }
 
     //checks that the drone is an allowed type 
@@ -57,22 +60,33 @@ public class levelManager : MonoBehaviour
     //all the code that should be run when the level ends, adds up score etc.
     private void endLevel()
     {
-        //todo: add points to the players' total
+        saveDataClass saveData = saveGameSystem.LoadGame("default");
+        if (saveData != null)
+        {
+            Debug.Log("save was not null");
+            saveData.playerPoints += points;
+            Debug.Log(saveData.playerPoints + " " + saveData.levelUnlocked);
+        } else
+        {
+            Debug.Log("did not find save game");
+            saveData = new saveDataClass();
+        }
+
 
         //unlock next level if they got all targets
-        if (targetsRemaining <= 0)
+        if (targetsRemaining <= 0 && saveData.levelUnlocked < levelNumber)
         {
-            unlockNextLevel();
+            saveData.levelUnlocked++;
+            saveGameSystem.SaveGame(saveData, "default");
         }
 
         //give player the option to try again or go back to menu with popup
         //display their score
         //tell them if they won or not
         menu.SetActive(true);
-    }
-    private void unlockNextLevel()
-    {
 
+        //for now just send back to main menu
+        SceneManager.LoadScene("Menu");
     }
 
     public void addPoints()

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class saveDataClass
 {
-    public int points {  get; set; }
-    public int levelUnlocked { get; set; }
-    public string username { get; set; }
+    public int playerPoints = 0;
+    public int levelUnlocked = 0;
+    public string username = "default";
 }
