@@ -104,6 +104,7 @@ public class levelManager : MonoBehaviour
     //incrementers and decrementers for variables
     public void incrementTargetsRemaining() { targetsRemaining++; }
     public void decrementTargetsRemaining() { targetsRemaining--; }
+    public void incrementDronesRemaining() { dronesRemaining++; }
     public void decrementDronesRemaining() { dronesRemaining--; dronesRemainingText.text = remainingBaseString + dronesRemaining; }
 
     //getters and setters for values

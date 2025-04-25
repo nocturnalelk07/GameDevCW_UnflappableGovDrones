@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3399247283659097314}
   - component: {fileID: 8539767746948144361}
   - component: {fileID: 2987145607874081697}
-  - component: {fileID: -4357281813986197307}
+  - component: {fileID: 8677409989267662886}
   m_Layer: 0
-  m_Name: other drone
+  m_Name: splitter drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +285,7 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &-4357281813986197307
+--- !u!114 &8677409989267662886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,11 +294,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2931851291676130233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 016c775d7cf92aa40899c74b05ce27ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 613a90babce411d479e5b2ca78ebcd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneMass: 10
-  droneType: other drone
+  droneMass: 5
+  droneType: splitter drone
+  power: 100
 --- !u!1 &3068876129762533580
 GameObject:
   m_ObjectHideFlags: 0

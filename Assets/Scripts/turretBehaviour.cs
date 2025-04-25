@@ -197,10 +197,12 @@ public class turretBehaviour : MonoBehaviour
         //if the turret doesnt have a drone, the drone type is allowed for the level, and not all drones have been used for the level
         if (equippedDrone == null && levelManager.instance.checkType(newDrone) && levelManager.instance.getDronesRemaining() > 0)
         {
+            Debug.Log("passed if");
             equippedDrone = Instantiate(newDrone, barrelPivotPoint.transform.position, barrelPivotPoint.transform.rotation);
+            lineRenderer = equippedDrone.GetLineRenderer();
         }
         
-        lineRenderer = equippedDrone.GetLineRenderer();
+        
     }
 
     public bool canFire()

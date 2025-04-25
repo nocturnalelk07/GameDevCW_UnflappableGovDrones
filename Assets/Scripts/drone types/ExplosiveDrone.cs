@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class ExplosiveDrone : DroneBaseClass
 {
-    /**
+    
     [SerializeField] private float explosionRadius;
     [SerializeField] private float explosionForceMultiplier;
     Collider2D[] inExplosion = null;
-    */
+    
     public override void activate()
     {
         if (!abilityUsed)
         {
-            //explode();
+            explode();
             abilityUsed = true;
         }
     }
@@ -19,7 +19,7 @@ public class ExplosiveDrone : DroneBaseClass
     protected override void destroyEffects()
     {
     }
-    /**
+    
     private void explode()
     {
         inExplosion = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -45,5 +45,5 @@ public class ExplosiveDrone : DroneBaseClass
     {
         //particle effects for explosion here
     }
-    */
+    
 }
