@@ -4,15 +4,18 @@ using UnityEngine;
 public class SplitterDrone : DroneBaseClass
 {
     [SerializeField] private float power;
+    private Vector2 northEast = new Vector2(1,1);
+    private Vector2 southEast = new Vector2(1,-1);
     public override void activate()
     {
-        
+        if(state.GetType() == typeof(DroneFiringState) && !abilityUsed)
+        {
+            fireDrone(northEast);
+            fireDrone(southEast);
+            abilityUsed = true;
+        }
         //splits into 3 drones by firing 2 others
-        Vector2 northEast = new Vector2(0.5f, 0.5f);
-        Vector2 southEast = new Vector2(0.5f, -0.5f);
-        fireDrone(northEast);
-        fireDrone(southEast);
-        abilityUsed = true;
+        
     }
 
     protected override void destroyEffects()
