@@ -22,6 +22,7 @@ public abstract class DroneBaseClass : MonoBehaviour
     [SerializeField] protected float droneMass;
     [SerializeField] protected string droneType;
     protected bool abilityUsed = false;
+    protected const string destroyTrigger = "TrDestroy";
 
     //concrete unity method implementations
     private void Awake()
@@ -81,6 +82,12 @@ public abstract class DroneBaseClass : MonoBehaviour
     public bool getIsMoving() { return isMoving; }
     public void destroyThis() 
     {
+        //calls the trigger to start the destroy animation
+        animator.SetTrigger(destroyTrigger);
+    }
+    public void OnDestroyFinished()
+    {
+        //handles destruction effects once the animation is finished
         destroyEffects();
         levelManager.instance.checkGameOver();
         Destroy(gameObject);

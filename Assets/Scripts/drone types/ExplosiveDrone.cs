@@ -9,10 +9,9 @@ public class ExplosiveDrone : DroneBaseClass
     
     public override void activate()
     {
-        if (!abilityUsed)
+        if (!abilityUsed && state.GetType() == typeof(DroneFiringState))
         {
-            explode();
-            abilityUsed = true;
+            destroyThis();
         }
     }
 

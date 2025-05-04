@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class hittable : MonoBehaviour
 {
     private const string hittableStr = "hittable";
+    protected const string destroyTrigger = "TrDestroy";
     [SerializeField] protected float health;
 
 
@@ -24,8 +25,13 @@ public abstract class hittable : MonoBehaviour
         }
     }
 
+    //called when the destroy animation is finished
+    public void onDestroyFinished()
+    {
+        afterDestroyComplete();
+    }
+    protected abstract void afterDestroyComplete();
     //this can be implemented for different behaviour by other scripts
     public abstract void noHealth();
-
 }
     
