@@ -34,4 +34,8 @@ public class SplitterDrone : DroneBaseClass
     {
         abilityUsed = true;
     }
+
+    protected override void startAbstract()
+    {
+    }
 }

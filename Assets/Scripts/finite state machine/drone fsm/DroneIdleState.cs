@@ -4,7 +4,6 @@ public class DroneIdleState : IDroneState
 {
     public void Enter(DroneBaseClass drone)
     {
-        Debug.Log("drone idle state for " + drone.getDroneType());
         drone.getRB2D().gravityScale = 0;
         return;
     }

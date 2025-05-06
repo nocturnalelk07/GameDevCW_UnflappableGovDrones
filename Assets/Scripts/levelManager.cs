@@ -15,7 +15,7 @@ public class levelManager : MonoBehaviour
     [SerializeField] private DroneBaseClass[] droneTypesAvailable;
     [SerializeField] private int dronesAvailable;
     [SerializeField] private TextMeshProUGUI dronesRemainingText;
-    private const string remainingBaseString = "drones remaining: ";
+    private const string remainingBaseString = "Drones remaining: ";
     private int dronesRemaining;
     private int points;
     private int levelNumber;
@@ -84,10 +84,8 @@ public class levelManager : MonoBehaviour
         menu.SetActive(true);
         if (targetsRemaining <= 0)
         {
-            Debug.Log(points);
             saveData.playerPoints += points;
             saveGameSystem.SaveGame(saveData, "default");
-            Debug.Log(saveData.playerPoints);
             winLoseText.text = "You Won!";
             pointsText.text = "Points Earnt:\n" + points;
         } else

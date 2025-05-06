@@ -12,4 +12,8 @@ public class BasicDrone : DroneBaseClass
     {
         //nothing for now
     }
+
+    protected override void startAbstract()
+    {
+    }
 }

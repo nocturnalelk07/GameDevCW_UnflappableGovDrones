@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof (LineRenderer))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public abstract class DroneBaseClass : MonoBehaviour
 {//the subclass sandbox base class for drones in the game
 
@@ -12,6 +13,7 @@ public abstract class DroneBaseClass : MonoBehaviour
     protected CircleCollider2D circleCollider;
     protected LineRenderer lineRenderer;
     protected Animator animator;
+    protected AudioSource deathSound;
 
     [Header("finite state machine")]
     protected IDroneState state = new DroneIdleState();
@@ -31,12 +33,14 @@ public abstract class DroneBaseClass : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         lineRenderer = GetComponent<LineRenderer>();
         animator = GetComponent<Animator>();
+        deathSound = GetComponent<AudioSource>();
         rb2d.mass = droneMass;
         levelManager.instance.decrementDronesRemaining();
     }
     private void Start()
     {
         state.Enter(this);
+        startAbstract();
     }
     private void Update()
     {
@@ -48,6 +52,7 @@ public abstract class DroneBaseClass : MonoBehaviour
     public abstract void activate();
     //plays the animation, sound effect etc for when the drone destroys itself
     protected abstract void destroyEffects();
+    protected abstract void startAbstract();
 
     //concrete methods
     //updates the state of the drone
@@ -83,12 +88,14 @@ public abstract class DroneBaseClass : MonoBehaviour
     public void destroyThis() 
     {
         //calls the trigger to start the destroy animation
+        deathSound.Play();
         animator.SetTrigger(destroyTrigger);
+        destroyEffects();
     }
     public void OnDestroyFinished()
     {
         //handles destruction effects once the animation is finished
-        destroyEffects();
+        
         levelManager.instance.checkGameOver();
         Destroy(gameObject);
     }

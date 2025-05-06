@@ -16,4 +16,8 @@ public class DropDrone : DroneBaseClass
     protected override void destroyEffects()
     {
     }
+
+    protected override void startAbstract()
+    {
+    }
 }

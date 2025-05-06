@@ -6,7 +6,6 @@ public class DroneFiringState : IDroneState
     private const string triggerName = "TrFired";
     public void Enter(DroneBaseClass drone)
     {
-        Debug.Log("firing state");
         //firing animation starts
         drone.GetAnimator().SetTrigger(triggerName);
         drone.getRB2D().gravityScale = 1;

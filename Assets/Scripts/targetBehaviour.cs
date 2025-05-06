@@ -13,10 +13,11 @@ public class targetBehaviour : hittable
 
     protected override void afterDestroyComplete()
     {
-        Destroy(gameObject);
+        
         levelManager.instance.addPoints();
         levelManager.instance.decrementTargetsRemaining();
         levelManager.instance.checkGameOver();
+        Destroy(gameObject);
     }
 
     private void Start()
