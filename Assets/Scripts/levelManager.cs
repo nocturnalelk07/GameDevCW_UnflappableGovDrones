@@ -15,6 +15,12 @@ public class levelManager : MonoBehaviour
     [SerializeField] private DroneBaseClass[] droneTypesAvailable;
     [SerializeField] private int dronesAvailable;
     [SerializeField] private TextMeshProUGUI dronesRemainingText;
+
+    [SerializeField] private UnityEngine.UI.Button basicButton;
+    [SerializeField] private UnityEngine.UI.Button dropButton;
+    [SerializeField] private UnityEngine.UI.Button splitterButton;
+    [SerializeField] private UnityEngine.UI.Button explosiveButton;
+
     private const string remainingBaseString = "Drones remaining: ";
     private int dronesRemaining;
     private int points;
@@ -40,6 +46,34 @@ public class levelManager : MonoBehaviour
         dronesRemaining = dronesAvailable;
         dronesRemainingText.text = remainingBaseString + dronesRemaining;
         levelNumber = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private void Start()
+    {
+        basicButton.interactable = false;
+        dropButton.interactable = false;
+        splitterButton.interactable = false;
+        explosiveButton.interactable = false;
+        foreach (var drone in droneTypesAvailable)
+        {
+            var droneType = drone.GetType();
+            if (droneType == typeof(BasicDrone))
+            {
+                basicButton.interactable = true;
+            }
+            if (droneType == typeof(DropDrone))
+            {
+                dropButton.interactable = true;
+            }
+            if (droneType == typeof(SplitterDrone))
+            {
+                splitterButton.interactable = true;
+            }
+            if (droneType == typeof(ExplosiveDrone))
+            {
+                explosiveButton.interactable = true;
+            }
+        }
     }
 
     //checks that the drone is an allowed type 

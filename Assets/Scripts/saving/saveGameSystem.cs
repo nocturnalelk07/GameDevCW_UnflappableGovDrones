@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor.Overlays;
 //save game system provided by sean
 
 public static class saveGameSystem
@@ -27,6 +26,7 @@ public static class saveGameSystem
 
     public static saveDataClass LoadGame (string name)
     {
+        Debug.Log(Application.persistentDataPath);
         if (!doesSaveGameExist(name))
         {
             return null;
